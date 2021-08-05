@@ -1,20 +1,17 @@
-import { Component } from "react";
-
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import ReactCountryFlag from "react-country-flag"
 
-const Header = ({infos, setLang}) => {
-  console.log(setLang);
+const Header = ({infos, route, setLang }) => {
     const proceduralNav = () => {
       const pages = infos.pages
       const returnedNav = []
-      console.log(pages);
       for ( const page in pages ) {
+        const path = (page === 'home')? pages[page].path:pages[page].path[infos.lang]
         returnedNav.push(
           <Nav.Item>
-            <Nav.Link href={ pages[page].path }>{ pages[page].name[infos.lang]}</Nav.Link>
+            <Nav.Link key={ page } href={ path }>{ pages[page].name[infos.lang]}</Nav.Link>
           </Nav.Item>
         )
       }
@@ -34,9 +31,13 @@ const Header = ({infos, setLang}) => {
       }]
       for( const i in flags) {
         finalFlags.push(
-          <Nav.Item><ReactCountryFlag
+          <Nav.Item key={i}><ReactCountryFlag
           lang={ flags[i].lang }
-          onClick={ (e)=> { setLang(e.target.lang) } }
+          onClick={ (e)=>{
+            let actualPath = document.location.href.split('/')
+            actualPath = "/"+actualPath[actualPath.length-1]
+            setLang(e.target.lang, actualPath)
+          }}
           className={ flags[i].lang + " emojiFlag"  }
           countryCode={ flags[i].countryCode }
           style={{
@@ -50,12 +51,12 @@ const Header = ({infos, setLang}) => {
     }
     return(
       <Navbar bg="dark" variant="dark" className={ infos.lang }>
-        <Container>
-          <Navbar.Brand href="/">Adricen</Navbar.Brand>
-          <Nav className="justify-content-center">
+        <Container fluid="md">
+          <Navbar.Brand key={'key1'} href="/">Adricen</Navbar.Brand>
+          <Nav key={'key2'} className="justify-content-center">
             { proceduralNav() }
           </Nav>
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Collapse key={'key3'} className="justify-content-end">
             { flagAside() }
           </Navbar.Collapse>
         </Container>

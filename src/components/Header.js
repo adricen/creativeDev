@@ -11,7 +11,7 @@ const Header = ({infos, route, setLang }) => {
         const path = (page === 'home')? pages[page].path:pages[page].path[infos.lang]
         returnedNav.push(
           <Nav.Item>
-            <Nav.Link key={ page } href={ path }>{ pages[page].name[infos.lang]}</Nav.Link>
+            <Nav.Link key={ page } href={ "#/"+path }>{ pages[page].name[infos.lang]}</Nav.Link>
           </Nav.Item>
         )
       }
@@ -35,7 +35,7 @@ const Header = ({infos, route, setLang }) => {
           lang={ flags[i].lang }
           onClick={ (e)=>{
             let actualPath = document.location.href.split('/')
-            actualPath = "/"+actualPath[actualPath.length-1]
+            actualPath = actualPath[actualPath.length-1]
             setLang(e.target.lang, actualPath)
           }}
           className={ flags[i].lang + " emojiFlag"  }
@@ -50,17 +50,14 @@ const Header = ({infos, route, setLang }) => {
       return finalFlags
     }
     return(
-      <Navbar bg="dark" variant="dark" className={ infos.lang }>
-        <Container fluid="md">
-          <Navbar.Brand key={'key1'} href="/">Adricen</Navbar.Brand>
-          <Nav key={'key2'} className="justify-content-center">
-            { proceduralNav() }
-          </Nav>
-          <Navbar.Collapse key={'key3'} className="justify-content-end">
-            { flagAside() }
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <Container fluid="md" className="mt-5 mb-5">
+        <Nav justify key={'key2'} className="justify-content-center">
+          { proceduralNav() }
+        </Nav>
+        <Navbar.Collapse key={'key3'} className="justify-content-end">
+          { flagAside() }
+        </Navbar.Collapse>
+      </Container>
     )
 }
 export default Header

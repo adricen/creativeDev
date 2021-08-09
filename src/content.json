@@ -6,7 +6,7 @@
         "fr":"Accueil",
         "en":"Home"
       },
-      "path":"/",
+      "path":"",
       "content": {
         "fr":"Bienvenus sur le portfolio de Adrien Centonze, créative developpeur et 3D artist.",
         "en":"Welcome to the portfolio of Adrien Centonze, creative developper aud 3D artist."
@@ -18,8 +18,8 @@
         "en":"About"
       },
       "path":{
-        "en":"/about",
-        "fr":"/a-propos"
+        "en":"about",
+        "fr":"a-propos"
       },
       "content":{
         "fr":"3D artist pendant 7 ans, parcourant l'industrie du jeux vidéo lyonnais, puis Developpeur web durant 5 ans pour enfin devenir creative developper à mon compte",
@@ -32,8 +32,8 @@
         "en":"Contact"
       },
       "path":{
-        "en":"/contact",
-        "fr":"/contact"
+        "en":"contact",
+        "fr":"contact"
       },
       "content": {
         "fr":"Me contacter",

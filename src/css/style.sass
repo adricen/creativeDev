@@ -1,4 +1,30 @@
-@import './custom.scss'
+@import './custom.sass'
+body
+  width: 100vw
+  height: 100vh
+  font-family: "Inter var", sans-serif
+  -webkit-font-smoothing: antialiased
 
-.App-header
-  background-color: red !important
+#root
+  // position: fixed
+  width: 100%
+  height: 100%
+  margin: 0
+  padding: 0
+  // top: 0
+
+
+.main
+  // position: absolute
+  color: white
+  z-index: 1
+  position: relative
+
+.canvas-container
+  position: fixed
+  width: 100vw
+  height: 100vh
+  top: 0
+
+h1, h2, h3, h4, h5, h6
+  font-weight: 100

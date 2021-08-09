@@ -1,9 +1,10 @@
 import { Component } from 'react'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {HashRouter, Switch, Route} from 'react-router-dom'
 import Cookies from 'universal-cookie';
 import Content from "../content.json"
 import Header from "./Header.js"
 import Page from "./Page.js"
+import ThreeRender from "./ThreeRender-start.js"
 
 const cookies = new Cookies();
 class App extends Component {
@@ -23,10 +24,10 @@ class App extends Component {
     this.setState({ lang: newLang })
     cookies.set('lang', newLang);
     // hard way new location -- improvable...
-    if(oldRoute === '/about' && newLang === 'fr'){
-      document.location.href =  '/a-propos'
-    } else if(oldRoute === '/a-propos' && newLang === 'en') {
-      document.location.href =  '/about'
+    if(oldRoute === 'about' && newLang === 'fr'){
+      window.location.hash =  '#/a-propos'
+    } else if(oldRoute === 'a-propos' && newLang === 'en') {
+      window.location.hash =  '#/about'
     }
   }
   defaultLanguage() {
@@ -43,7 +44,7 @@ class App extends Component {
     for( const route in routes ){
       const path = ( route === 'home' )? routes[route].path:routes[route].path[this.state.lang]
       finalRoutes.push(
-        <Route exact={true} key={'route'+i} path={ path } render={ (props)=><Page key={'page'+i} lang={this.state.lang} {...props} content={ routes[route] }/> }/>
+        <Route exact={true} key={'route'+i} path={ '/'+path } render={ (props)=><Page key={'page'+i} lang={this.state.lang} {...props} content={ routes[route] }/> }/>
       )
       i++
     }
@@ -53,12 +54,17 @@ class App extends Component {
   render() {
     return (
       <>
-      <BrowserRouter>
+      <HashRouter>
+        <div className="canvas-container">
+          <ThreeRender />
+        </div>
+        <div className="main">
         <Header infos={ this.state } setLang={ this.setLanguage }/>
         <Switch>
           { this.proceduralRoute() }
         </Switch>
-      </BrowserRouter>
+        </div>
+      </HashRouter>
       </>
     );
   }
